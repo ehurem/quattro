@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quattro.Persistence", "Quattro.Persistence\Quattro.Persistence.csproj", "{31FD7714-20B1-411D-8492-7E15D13FA6E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quattro.Persistence.Abstractions", "Quattro.Persistence.Abstractions\Quattro.Persistence.Abstractions.csproj", "{898660E7-D345-4C6E-B49E-668BFD5DCAE3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31FD7714-20B1-411D-8492-7E15D13FA6E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31FD7714-20B1-411D-8492-7E15D13FA6E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31FD7714-20B1-411D-8492-7E15D13FA6E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31FD7714-20B1-411D-8492-7E15D13FA6E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{898660E7-D345-4C6E-B49E-668BFD5DCAE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{898660E7-D345-4C6E-B49E-668BFD5DCAE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{898660E7-D345-4C6E-B49E-668BFD5DCAE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{898660E7-D345-4C6E-B49E-668BFD5DCAE3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09973CF2-27F4-4C3C-9149-6CC2731F3DA1}
+	EndGlobalSection
+EndGlobal
