@@ -2,20 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.16" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Quattro.Persistence.Abstractions\Quattro.Persistence.Abstractions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="EF\Configuration\" />
+    <ProjectReference Include="..\Quattro.Persistence\Quattro.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
