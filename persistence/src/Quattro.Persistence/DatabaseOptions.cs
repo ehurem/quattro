@@ -3,7 +3,8 @@
     public enum Database
     {
         MySql,
-        SqlServer
+        SqlServer,
+        SQLite
     }
     public class DatabaseOptions
     {

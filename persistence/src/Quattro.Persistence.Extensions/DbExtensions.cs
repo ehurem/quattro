@@ -2,24 +2,24 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Quattro.Persistence.EF;
-using Quattro.Persistence;
 
 namespace Quattro.Persistence.Extensions
 {
+    /// <summary>
+    /// Extension methods to add EntityFramework database and unit of work support for Quattro applications.
+    /// </summary>
     public static class DbExtensions
     {
-
-        public static IServiceCollection ConfigureDatabase<TContext, TUnitOfWork>(this IServiceCollection services, Action<DatabaseOptions> func)
+        public static IServiceCollection UseDbContextAndUnitOfWork<TContext, TUnitOfWork>(this IServiceCollection services, Action<DatabaseOptions> databaseOptionsAction)
             where TContext : DbContext
-            where TUnitOfWork : UnitOfWork
+            where TUnitOfWork : UnitOfWork, IQuattroUnitOfWork
         {
             var dbOptions = new DatabaseOptions();
 
-            func(dbOptions);
+            databaseOptionsAction?.Invoke(dbOptions);
 
             if (string.IsNullOrWhiteSpace(dbOptions.ConnectionString))
                 throw new ArgumentNullException(nameof(dbOptions.ConnectionString));
-
 
             services.AddDbContext<TContext>(options =>
             {
@@ -41,8 +41,7 @@ namespace Quattro.Persistence.Extensions
                 }
             });
 
-            services.AddScoped<TUnitOfWork>();
-
+            services.AddScoped<IQuattroUnitOfWork, TUnitOfWork>();
             return services;
         }
     }
