@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\common\src\Paging\Quattro.Paging.Abstractions\Quattro.Paging.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\common\src\Paging\Quattro.Paging\Quattro.Paging.csproj" />
+    <ProjectReference Include="..\..\..\domain\src\Quattro.Domain.Entities\Quattro.Domain.Entities.csproj" />
     <ProjectReference Include="..\Quattro.Persistence.Abstractions\Quattro.Persistence.Abstractions.csproj" />
   </ItemGroup>
 

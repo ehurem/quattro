@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quattro.Domain", "Quattro.Domain\Quattro.Domain.csproj", "{50697FF6-EDD2-4FD0-AAA6-61ED9C229052}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quattro.Domain", "Quattro.Domain\Quattro.Domain.csproj", "{50697FF6-EDD2-4FD0-AAA6-61ED9C229052}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quattro.Domain.Abstractions", "Quattro.Domain.Abstractions\Quattro.Domain.Abstractions.csproj", "{E496951B-BD7E-42F0-8CB5-8E5D05D471A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quattro.Domain.Abstractions", "Quattro.Domain.Abstractions\Quattro.Domain.Abstractions.csproj", "{E496951B-BD7E-42F0-8CB5-8E5D05D471A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quattro.Domain.Entities", "Quattro.Domain.Entities\Quattro.Domain.Entities.csproj", "{8652F84C-0223-46CD-A6F5-C35E1C4011FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quattro.Domain.Dtos", "Quattro.Domain.Dtos\Quattro.Domain.Dtos.csproj", "{2B41340D-4C36-4320-BB7F-CCB3EB15A053}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quattro.Domain.Mapping", "Quattro.Domain.Mapping\Quattro.Domain.Mapping.csproj", "{6EFF9E33-71CF-4825-8CB0-656F408AC32A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{E496951B-BD7E-42F0-8CB5-8E5D05D471A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E496951B-BD7E-42F0-8CB5-8E5D05D471A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E496951B-BD7E-42F0-8CB5-8E5D05D471A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8652F84C-0223-46CD-A6F5-C35E1C4011FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8652F84C-0223-46CD-A6F5-C35E1C4011FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8652F84C-0223-46CD-A6F5-C35E1C4011FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8652F84C-0223-46CD-A6F5-C35E1C4011FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B41340D-4C36-4320-BB7F-CCB3EB15A053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B41340D-4C36-4320-BB7F-CCB3EB15A053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B41340D-4C36-4320-BB7F-CCB3EB15A053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B41340D-4C36-4320-BB7F-CCB3EB15A053}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EFF9E33-71CF-4825-8CB0-656F408AC32A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EFF9E33-71CF-4825-8CB0-656F408AC32A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EFF9E33-71CF-4825-8CB0-656F408AC32A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EFF9E33-71CF-4825-8CB0-656F408AC32A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
