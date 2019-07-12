@@ -40,6 +40,8 @@ namespace Quattro.Desktop
         {
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
+
+            //test for git acc
         }
     }
 }
