@@ -4,9 +4,123 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quattro.Desktop"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d" Height="600" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <LinearGradientBrush.RelativeTransform>
+                <TransformGroup>
+                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                    <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </LinearGradientBrush.RelativeTransform>
+            <GradientStop Color="#FF0B032D"/>
+            <GradientStop Color="#FFFFB997" Offset="1"/>
+            <GradientStop Color="#FF843B62" Offset="0.33"/>
+            <GradientStop Color="#FFF67E7D" Offset="0.66"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen" >
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60"></EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"></EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MenuClose" >
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"></EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"></EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"></BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"></BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
     <Grid>
-        
+        <Grid Height="50" VerticalAlignment="Top">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF0B032D"/>
+                    <GradientStop Color="#FFFFB997" Offset="1"/>
+                    <GradientStop Color="#FF843B62" Offset="0.33"/>
+                    <GradientStop Color="#FFF67E7D" Offset="0.66"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="User name" VerticalAlignment="Center" FontSize="18" Foreground="#FFFFB7A6"></TextBlock>
+                <materialDesign:PopupBox Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Foreground="#FFFFB7A6">
+                    <StackPanel Width="150">
+                        <Button Content="Podesavanja" Foreground="#FFFFB7A6"></Button>
+                        <Button Content="Pomoc" Foreground="#FFFFB7A6"></Button>
+                        <Separator></Separator>
+                        <Button x:Name="ButtonPopupLogout" Content="Logout" Foreground="#FFFFB7A6" Click="ButtonPopupLogout_OnClick"></Button>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#FF843B62">
+            <StackPanel>
+                <Grid Height="150" Background="#FF843B62">
+                    <Button x:Name="ButtonCloseMenu" Height="60" Width="60" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="ButtonCloseMenu_OnClick">
+                        <materialDesign:PackIcon Kind="ArrowLeft" Foreground="#FFFFB997" Width="25" Height="25"/>
+                    </Button>
+                    <Button x:Name="ButtonOpenMenu" Height="60" Width="60" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonOpenMenu_OnClick">
+                        <materialDesign:PackIcon Kind="Menu" Foreground="#FFFFB997" Width="25" Height="25"/>
+                    </Button>
+                </Grid>
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" Foreground="#FFFFB7A6" BorderThickness="0">
+                    <ListViewItem Height="80">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Home" Width="30" Height="30" Margin="10" VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Text="Pocetna" Margin="10 20"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="80">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Food" Width="30" Height="30" Margin="10" VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Text="Artikli" Margin="10 20"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="80">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FileReport" Width="30" Height="30" Margin="10" VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Text="Pregledi" Margin="10 20"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="80">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Users" Width="30" Height="30" Margin="10" VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Text="Korisnici" Margin="10 20"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="80">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" Margin="10" VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Text="Podesavanja" Margin="10 20"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
