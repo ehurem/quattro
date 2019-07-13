@@ -26,13 +26,13 @@ namespace Quattro.Persistence.Abstractions
         IEnumerable<string> IncludeStrings { get; }
 
         /// <summary>
+        /// Order type.
+        /// </summary>
+        Order Order { get; set; }
+
+        /// <summary>
         /// OrderBy clause.
         /// </summary>
         Expression<Func<T, object>> OrderBy { get; }
-
-        /// <summary>
-        /// OrderByDescending clause.
-        /// </summary>
-        Expression<Func<T, object>> OrderByDescending { get; }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Quattro.Paging;
+using Quattro.Paging.Abstractions;
 using Quattro.Persistence.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,7 @@ namespace Quattro.Persistence.EF
     {
         protected DbContext Context { get; }
 
-        protected IQueryable<TEntity> QuerySet => DbSet;
+        protected IQueryable<TEntity> QuerySet => DbSet.AsNoTracking();
 
         protected DbSet<TEntity> DbSet { get; }
 
@@ -91,10 +93,10 @@ namespace Quattro.Persistence.EF
             if (specification.Predicate != null)
                 query = query.Where(specification.Predicate);
 
-            if (specification.OrderBy != null)
+            if (specification.Order == Order.Ascending)
                 query = query.OrderBy(specification.OrderBy);
-            else if (specification.OrderByDescending != null)
-                query = query.OrderByDescending(specification.OrderByDescending);
+            else
+                query = query.OrderByDescending(specification.OrderBy);
 
             var result = query.Select(selector);
             return await result.ToListAsync();
@@ -123,7 +125,80 @@ namespace Quattro.Persistence.EF
 
         public Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return QuerySet.FirstOrDefaultAsync(predicate);
+            return DbSet.FirstOrDefaultAsync(predicate);
+        }
+
+        public async Task<IPagedList<TEntity>> GetPagedAsync(IPagedSpecification<TEntity> specification)
+        {
+            return await GetPagedAsync<TEntity>(specification, e => e);
+        }
+
+        public async Task<IPagedList<TResult>> GetPagedAsync<TResult>(IPagedSpecification<TEntity> specification, Expression<Func<TEntity, TResult>> selector)
+        {
+            var query = QuerySet;
+
+            if (specification.Includes.Any())
+            {
+                var includeProperties = specification.Includes?.Where(ip => ip != null).ToArray() ?? Enumerable.Empty<Expression<Func<TEntity, object>>>().ToArray();
+
+                foreach (var includeProperty in includeProperties)
+                    query = query.Include(includeProperty);
+            }
+            else if (specification.IncludeStrings.Any())
+            {
+                var includeProperties = specification.IncludeStrings?.Where(ip => !string.IsNullOrWhiteSpace(ip)).ToArray() ?? Enumerable.Empty<string>().ToArray();
+
+                foreach (var includeProperty in includeProperties)
+                    query = query.Include(includeProperty);
+            }
+
+            if (specification.Predicate != null)
+                query = query.Where(specification.Predicate);
+
+            if (specification.OrderBy != null)
+            {
+                query = specification.Order == Order.Ascending ? query.OrderBy(specification.OrderBy) : query.OrderByDescending(specification.OrderBy);
+            }
+
+            if (specification.PagingEnabled)
+            {
+                var result = query.Select(selector).ToPagedList(specification.Page, specification.RecordsPerPage);
+                return result;
+            }
+            else
+            {
+                var result = await query.Select(selector).ToListAsync();
+                return result.ToPagedList(1, result.Count);
+            }
+        }
+
+        public Task<IPagedList<TEntity>> GetPagedAsync(Expression<Func<TEntity, bool>> predicate, int page, int pageSize)
+        {
+            return GetPagedAsync(predicate, page, pageSize, null);
+        }
+
+        public Task<IPagedList<TEntity>> GetPagedAsync(Expression<Func<TEntity, bool>> predicate, int page, int pageSize, params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            var query = QuerySet;
+
+            if(includeProperties != null)
+            {
+                foreach (var includeProperty in includeProperties)
+                    query = query.Include(includeProperty);
+            }
+
+            var result = query.ToPagedList(predicate, page, pageSize);
+
+            return Task.FromResult(result);
+        }
+
+        public Task<IPagedList<TResult>> GetPagedAsync<TResult>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TResult>> selector, int page, int pageSize)
+        {
+            var query = QuerySet;
+
+            var result = query.Where(predicate).Select(selector).ToPagedList(page, pageSize);
+
+            return Task.FromResult(result);
         }
     }
 }

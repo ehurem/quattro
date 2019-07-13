@@ -5,4 +5,8 @@
     <Version>1.0.0</Version>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\common\src\Paging\Quattro.Paging.Abstractions\Quattro.Paging.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>
