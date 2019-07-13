@@ -10,6 +10,7 @@ namespace Quattro.Desktop
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new WindowViewModel(this);
         }
 
         private void ButtonPopupLogout_OnClick(object sender, RoutedEventArgs e)
@@ -19,14 +20,14 @@ namespace Quattro.Desktop
 
         private void ButtonOpenMenu_OnClick(object sender, RoutedEventArgs e)
         {
-            ButtonOpenMenu.Visibility = Visibility.Collapsed;
-            ButtonCloseMenu.Visibility = Visibility.Visible;
+            //ButtonOpenMenu.Visibility = Visibility.Collapsed;
+            //ButtonCloseMenu.Visibility = Visibility.Visible;
         }
 
         private void ButtonCloseMenu_OnClick(object sender, RoutedEventArgs e)
         {
-            ButtonOpenMenu.Visibility = Visibility.Visible;
-            ButtonCloseMenu.Visibility = Visibility.Collapsed;
+            //ButtonOpenMenu.Visibility = Visibility.Visible;
+            //ButtonCloseMenu.Visibility = Visibility.Collapsed;
         }
     }
 }

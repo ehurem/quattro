@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quattro.Desktop.ViewModels
+namespace Quattro.Desktop.ViewModel
 {
     public class ItemViewModel
     {
