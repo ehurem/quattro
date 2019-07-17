@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quattro.Desktop"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" 
         Height="600" 
         Width="1000" 
         WindowStartupLocation="CenterScreen" 
-        WindowStyle="None">
+        WindowStyle="None"
+        MinWidth="{Binding WindowMinimumWidth}"
+        MinHeight="{Binding WindowMinimumHeight}">
     <!--<Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <LinearGradientBrush.RelativeTransform>
@@ -26,15 +27,15 @@
             <GradientStop Color="#FFF67E7D" Offset="0.66"/>
         </LinearGradientBrush>
     </Window.Background>-->
-    
+
     <Window.Resources>
         <Style TargetType="{x:Type local:MainWindow}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Window}">
                         <!-- Outer border with the drop shadow margin -->
-                        <Border Padding="{Binding OuterMarginSizeThickness, FallbackValue=10}">
-                            
+                        <!--<Border Padding="{Binding OuterMarginSizeThickness, FallbackValue=4}">-->
+
                             <!--Main window outline-->
                             <Grid Background="Red">
 
@@ -48,22 +49,66 @@
 
                                 <!-- The main window content-->
                                 <Grid>
-
                                     <Grid.RowDefinitions>
+                                        <!-- Row for user and window controls in top right corner -->
+                                        <RowDefinition Height="{Binding WindowControlGridLength, FallbackValue=40}" />
+                                        <!-- Drop shadow -->
+                                        <RowDefinition Height="Auto" />
                                         <!-- Window Content -->
                                         <RowDefinition Height="*" />
-
                                     </Grid.RowDefinitions>
-                                    
+
+                                    <!-- Top bar with username and window controls -->
+                                    <Grid Background="Purple" Row="0" Panel.ZIndex="1">
+                                        <Grid.ColumnDefinitions>
+                                            <!-- Title -->
+                                            <ColumnDefinition Width="*" />
+                                            <!-- Windows buttons -->
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Username text -->
+                                        <TextBlock Style="{StaticResource UsernameText}" Grid.Column="0" Text="ovojeusername" />
+
+                                        <!-- Window buttons -->
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" >
+                                            <Button Command="{Binding MinimizeCommand}" Style="{StaticResource WindowControlButton}" Content="_"></Button>
+                                            <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowControlButton}" Content="X"></Button>
+                                        </StackPanel>
+                                    </Grid>
+
                                     <!-- Menu bar -->
-                                    <Grid Grid.Column="0"></Grid>
+                                    <Grid Background="Red" Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <!-- Icon  -->
+                                            <ColumnDefinition Width="Auto" />
+                                            <!-- Title -->
+                                            <ColumnDefinition />
+                                            <!-- Windows buttons -->
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Icon -->
+                                        <!-- Edit the command below to return to home page always? -->
+                                        <Button Style="{StaticResource LogoIconButton}" Command="{Binding MenuCommand}">
+                                            <Image Source="Images/logo.png" />
+                                        </Button>
+
+                                        <!-- Page Content -->
+                                        <Border Grid.Row="1" Padding="{Binding InnerContentPadding}">
+                                            <ContentPresenter Content="{TemplateBinding Content}"></ContentPresenter>
+
+                                        </Border>
+
+
+                                    </Grid>
                                 </Grid>
 
 
                             </Grid>
 
-                            
-                        </Border>
+
+                        <!--</Border>-->
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -77,6 +122,7 @@
             CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Grid>
+        <Button Content="test"></Button>
 
     </Grid>
     <!--<Window.Resources>
@@ -203,8 +249,10 @@
             </StackPanel>
         </Grid>
 
-        --><!--xmlns:viewmodels="clr-namespace:Quattro.Desktop.ViewModels"
-        xmlns:views="clr-namespace:Quattro.Desktop.Views"--><!--
+        -->
+    <!--xmlns:viewmodels="clr-namespace:Quattro.Desktop.ViewModels"
+        xmlns:views="clr-namespace:Quattro.Desktop.Views"-->
+    <!--
         <ContentControl Grid.Row="1" Grid.Column="1" Grid.RowSpan="6" Grid.ColumnSpan="7" Content="{Binding}"></ContentControl>
     </Grid>-->
 </Window>
